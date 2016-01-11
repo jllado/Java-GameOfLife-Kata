@@ -20,7 +20,7 @@ public class GridTest {
     @Test
     public void should_right_position_be_dead_given_1x2_grid() throws Exception {
         CellsGrid cellsGrid = new CellsGrid(2);
-        cellsGrid.setStatus(true, 1);
+        cellsGrid.setStatus(false, 1);
 
         assertThat(cellsGrid.isRightAlive(0), is(false));
     }

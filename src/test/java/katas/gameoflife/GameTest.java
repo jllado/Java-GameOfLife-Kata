@@ -1,6 +1,5 @@
 package katas.gameoflife;
 
-import katas.gameoflife.Grid;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,37 +24,41 @@ public class GameTest {
 
     @Test
     public void should_create_1x1_grid_with_one_live_cell() throws Exception {
-        Grid grid = Grid.create(true, 1);
+        Game game = Game.create(1);
+        game.setCellStatus(true, 0);
 
-        assertThat(grid.width(), is(1));
-        assertThat(grid.height(), is(1));
-        assertThat(grid.liveCellsCount(), is(1));
+        assertThat(game.gridWidth(), is(1));
+        assertThat(game.gridHeight(), is(1));
+        assertThat(game.liveCellsCount(), is(1));
     }
 
     @Test
     public void should_create_1x1_grid_with_zero_live_cells() throws Exception {
-        Grid grid = Grid.create(false, 1);
+        Game game = Game.create(1);
 
-        assertThat(grid.width(), is(1));
-        assertThat(grid.height(), is(1));
-        assertThat(grid.liveCellsCount(), is(0));
+        assertThat(game.gridWidth(), is(1));
+        assertThat(game.gridHeight(), is(1));
+        assertThat(game.liveCellsCount(), is(0));
     }
 
     @Test
     public void should_create_1x2_grid_with_one_live_cell() throws Exception {
-        Grid grid = Grid.create(true, 2);
+        Game game = Game.create(2);
+        game.setCellStatus(true, 0);
 
-        assertThat(grid.width(), is(1));
-        assertThat(grid.height(), is(2));
-        assertThat(grid.liveCellsCount(), is(1));
+        assertThat(game.gridWidth(), is(1));
+        assertThat(game.gridHeight(), is(2));
+        assertThat(game.liveCellsCount(), is(1));
     }
 
     @Test
     public void should_create_1x2_grid_with_two_live_cells() throws Exception {
-        Grid grid = Grid.create(true, 2);
+        Game game = Game.create(2);
+        game.setCellStatus(true, 0);
+        game.setCellStatus(true, 1);
 
-        assertThat(grid.width(), is(1));
-        assertThat(grid.height(), is(2));
-        assertThat(grid.liveCellsCount(), is(2));
+        assertThat(game.gridWidth(), is(1));
+        assertThat(game.gridHeight(), is(2));
+        assertThat(game.liveCellsCount(), is(2));
     }
 }

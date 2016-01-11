@@ -40,4 +40,12 @@ public class GridTest {
 
         assertThat(cellsGrid.isLeftAlive(1), is(false));
     }
+
+    @Test
+    public void should_left_position_be_alive_given_1x3_grid() throws Exception {
+        CellsGrid cellsGrid = new CellsGrid(2);
+        cellsGrid.setStatus(true, 1);
+
+        assertThat(cellsGrid.isLeftAlive(2), is(true));
+    }
 }

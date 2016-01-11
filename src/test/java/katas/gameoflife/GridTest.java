@@ -28,8 +28,16 @@ public class GridTest {
     @Test
     public void should_left_position_be_alive_given_1x2_grid() throws Exception {
         CellsGrid cellsGrid = new CellsGrid(2);
-        cellsGrid.setStatus(false, 0);
+        cellsGrid.setStatus(true, 0);
 
         assertThat(cellsGrid.isLeftAlive(1), is(true));
+    }
+
+    @Test
+    public void should_left_position_be_dead_given_1x2_grid() throws Exception {
+        CellsGrid cellsGrid = new CellsGrid(2);
+        cellsGrid.setStatus(false, 0);
+
+        assertThat(cellsGrid.isLeftAlive(1), is(false));
     }
 }

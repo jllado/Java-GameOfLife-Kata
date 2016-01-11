@@ -36,6 +36,8 @@ public class Game {
     }
 
     public void iterate() {
-        cells[0] = false;
+        for (int i = 0; i < cells.length; i++) {
+            cells[i] = false;
+        }
     }
 }

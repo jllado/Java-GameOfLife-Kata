@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 - Grid 1x2 with one live cell
 - Grid 1x2 with two live cell
 - Given Grid 1x2 with one live cell, When iterate, Then zero live zells
-- Given Grid 1x3 with two separte live cells, When iterate, Then zero live zells
+- Given Grid 1x3 with two separate live cells, When iterate, Then zero live zells
  */
 public class GameTest {
 
@@ -31,5 +31,14 @@ public class GameTest {
         assertThat(grid.height(), is(1));
         assertThat(grid.width(), is(1));
         assertThat(grid.liveCellsCount(), is(1));
+    }
+
+    @Test
+    public void should_create_1x1_grid_with_zero_live_cells() throws Exception {
+        Grid grid = Grid.create();
+
+        assertThat(grid.height(), is(1));
+        assertThat(grid.width(), is(1));
+        assertThat(grid.liveCellsCount(), is(0));
     }
 }

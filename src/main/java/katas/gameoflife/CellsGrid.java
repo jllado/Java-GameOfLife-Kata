@@ -24,6 +24,6 @@ public class CellsGrid {
     }
 
     public boolean isRightAlive(int position) {
-        return false;
+        return true;
     }
 }

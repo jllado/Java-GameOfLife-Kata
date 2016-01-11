@@ -9,14 +9,14 @@ public class Grid {
     }
 
     public int height() {
-        return 0;
+        return 1;
     }
 
     public int width() {
-        return 0;
+        return 1;
     }
 
     public int liveCellsCount() {
-        return 0;
+        return 1;
     }
 }

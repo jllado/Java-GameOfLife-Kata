@@ -34,4 +34,8 @@ public class Game {
     public void setCellStatus(boolean alive, int position) {
         cells[position] = alive;
     }
+
+    public void iterate() {
+
+    }
 }

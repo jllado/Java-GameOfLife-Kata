@@ -13,10 +13,6 @@ import static org.hamcrest.Matchers.is;
 - 4. Any dead cell with exactly three live neighbours becomes a live cell.
  */
 /*
-- Grid 1x1 with one live cell
-- Grid 1x1 with zero live cell
-- Grid 1x2 with one live cell
-- Grid 1x2 with two live cell
 - Given Grid 1x2 with one live cell, When iterate, Then zero live zells
 - Given Grid 1x3 with two separate live cells, When iterate, Then zero live zells
  */
@@ -60,5 +56,15 @@ public class GameTest {
         assertThat(game.gridWidth(), is(1));
         assertThat(game.gridHeight(), is(2));
         assertThat(game.liveCellsCount(), is(2));
+    }
+
+    @Test
+    public void should_be_zero_zells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(2);
+        game.setCellStatus(true, 0);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(0));
     }
 }

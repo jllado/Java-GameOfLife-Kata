@@ -8,15 +8,15 @@ public class Game {
     private CellsGrid cellsGrid;
 
     public static Game create(int width, int height) {
-        return new Game(height);
+        return new Game(width, height);
     }
 
-    public Game(int height) {
-        this.cellsGrid = new CellsGrid(height);
+    public Game(int width, int height) {
+        this.cellsGrid = new CellsGrid(width, height);
     }
 
     public int gridWidth() {
-        return 1;
+        return cellsGrid.width();
     }
 
     public int gridHeight() {
@@ -28,14 +28,14 @@ public class Game {
     }
 
     public void setCellStatus(boolean alive, int xPosition, int position) {
-        cellsGrid.setStatus(alive, position);
+        cellsGrid.setStatus(alive, xPosition, position);
     }
 
     public void iterate() {
         CellsGrid newCellsGrid = CellsGrid.createCopy(cellsGrid);
         for (int position = 0; position < cellsGrid.height(); position++) {
             if (cellsGrid.isLeftNotAlive(position) || cellsGrid.isRightNotAlive(position)) {
-                newCellsGrid.setStatus(false, position);
+                newCellsGrid.setStatus(false, 0, position);
             }
         }
         cellsGrid = newCellsGrid;

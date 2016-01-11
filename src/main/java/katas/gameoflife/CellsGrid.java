@@ -1,23 +1,23 @@
 package katas.gameoflife;
 
 public class CellsGrid {
-    boolean[] cells;
+    private boolean[][] cells;
 
-    public CellsGrid(int height) {
-        this.cells = new boolean[height];
+    public CellsGrid(int width, int height) {
+        this.cells = new boolean[width][height];
     }
 
-    public void setStatus(boolean alive, int position) {
-        cells[position] = alive;
+    public void setStatus(boolean alive, int xPosition, int yPosition) {
+        cells[xPosition][yPosition] = alive;
     }
 
     public int height() {
-        return cells.length;
+        return cells[0].length;
     }
 
     public int liveCellsCount() {
         int liveCellsCount = 0;
-        for (boolean cell : cells) {
+        for (boolean cell : cells[0]) {
             liveCellsCount += cell ? 1 : 0;
         }
         return liveCellsCount;
@@ -25,18 +25,24 @@ public class CellsGrid {
 
     public boolean isRightAlive(int position) {
         int rightPosition = position + 1;
-        return rightPosition < cells.length && cells[(rightPosition)];
+        return rightPosition < cells[0].length && cells[0][rightPosition];
     }
 
     public boolean isLeftAlive(int position) {
         int leftPosition = position - 1;
-        return leftPosition >= 0 && cells[(leftPosition)];
+        return leftPosition >= 0 && cells[0][leftPosition];
     }
 
     public static CellsGrid createCopy(CellsGrid cellsGrid) {
-        CellsGrid cellsGridCopy = new CellsGrid(cellsGrid.height());
-        System.arraycopy(cellsGrid.cells, 0, cellsGridCopy.cells, 0, cellsGrid.height());
+        CellsGrid cellsGridCopy = new CellsGrid(cellsGrid.width(), cellsGrid.height());
+        for (int i = 0; i < cellsGrid.cells.length; i++) {
+            System.arraycopy(cellsGrid.cells[i], 0, cellsGridCopy.cells[i], 0, cellsGrid.height());
+        }
         return cellsGridCopy;
+    }
+
+    int width() {
+        return cells.length;
     }
 
     public boolean isLeftNotAlive(int position) {

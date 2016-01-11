@@ -49,4 +49,13 @@ public class GameTest {
         assertThat(grid.height(), is(2));
         assertThat(grid.liveCellsCount(), is(1));
     }
+
+    @Test
+    public void should_create_1x2_grid_with_two_live_cells() throws Exception {
+        Grid grid = Grid.create(true, 2);
+
+        assertThat(grid.width(), is(1));
+        assertThat(grid.height(), is(2));
+        assertThat(grid.liveCellsCount(), is(2));
+    }
 }

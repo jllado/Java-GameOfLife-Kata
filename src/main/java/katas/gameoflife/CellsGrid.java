@@ -28,6 +28,6 @@ public class CellsGrid {
     }
 
     public boolean isLeftAlive(int position) {
-        return cells[0];
+        return cells[position - 1];
     }
 }

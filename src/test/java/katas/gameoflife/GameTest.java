@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.is;
  */
 /*
 - Given Grid 1x2 with one live cell, When iterate, Then zero live zells
+- Given Grid 1x2 with tow live cells, When iterate, Then zero live zells
 - Given Grid 1x3 with two separate live cells, When iterate, Then zero live zells
  */
 public class GameTest {
@@ -62,6 +63,17 @@ public class GameTest {
     public void should_be_zero_zells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
         Game game = Game.create(2);
         game.setCellStatus(true, 0);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(0));
+    }
+
+    @Test
+    public void should_be_zero_zells_given_1x2_grid_with_two_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(2);
+        game.setCellStatus(true, 0);
+        game.setCellStatus(true, 1);
 
         game.iterate();
 

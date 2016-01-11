@@ -7,7 +7,7 @@ public class Game {
 
     private CellsGrid cellsGrid;
 
-    public static Game create(int height) {
+    public static Game create(int width, int height) {
         return new Game(height);
     }
 
@@ -27,7 +27,7 @@ public class Game {
         return cellsGrid.liveCellsCount();
     }
 
-    public void setCellStatus(boolean alive, int position) {
+    public void setCellStatus(boolean alive, int xPosition, int position) {
         cellsGrid.setStatus(alive, position);
     }
 

@@ -36,6 +36,6 @@ public class Game {
     }
 
     public void iterate() {
-
+        cells[0] = false;
     }
 }

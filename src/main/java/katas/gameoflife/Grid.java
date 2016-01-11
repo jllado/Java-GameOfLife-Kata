@@ -4,8 +4,15 @@ package katas.gameoflife;
  * Created by jllado on 1/11/16.
  */
 public class Grid {
-    public static Grid create() {
-        return new Grid();
+
+    private boolean isCellAlive;
+
+    public static Grid create(boolean isCellAlive) {
+        return new Grid(isCellAlive);
+    }
+
+    public Grid(boolean isCellAlive) {
+        this.isCellAlive = isCellAlive;
     }
 
     public int height() {
@@ -17,6 +24,6 @@ public class Grid {
     }
 
     public int liveCellsCount() {
-        return 1;
+        return isCellAlive ? 1 : 0;
     }
 }

@@ -5,14 +5,14 @@ package katas.gameoflife;
  */
 public class Game {
 
-    private boolean[] cells;
+    private final CellsGrid cellsGrid;
 
     public static Game create(int height) {
         return new Game(height);
     }
 
     public Game(int height) {
-        this.cells = new boolean[height];
+        this.cellsGrid = new CellsGrid(height);
     }
 
     public int gridWidth() {
@@ -20,24 +20,20 @@ public class Game {
     }
 
     public int gridHeight() {
-        return cells.length;
+        return cellsGrid.height();
     }
 
     public int liveCellsCount() {
-        int liveCellsCount = 0;
-        for (boolean cell : cells) {
-            liveCellsCount += cell ? 1 : 0;
-        }
-        return liveCellsCount;
+        return cellsGrid.liveCellsCount();
     }
 
     public void setCellStatus(boolean alive, int position) {
-        cells[position] = alive;
+        cellsGrid.setStatus(alive, position);
     }
 
     public void iterate() {
-        for (int i = 0; i < cells.length; i++) {
-            cells[i] = false;
+        for (int i = 0; i < cellsGrid.height(); i++) {
+            cellsGrid.setStatus(false, i);
         }
     }
 }

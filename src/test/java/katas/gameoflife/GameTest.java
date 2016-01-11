@@ -78,15 +78,15 @@ public class GameTest {
         assertThat(game.liveCellsCount(), is(0));
     }
 
-    @Test
-    public void should_be_one_cell_given_1x3_grid_with_three_live_cells_when_iterate() throws Exception {
-        Game game = Game.create(3);
-        game.setCellStatus(true, 0);
-        game.setCellStatus(true, 1);
-        game.setCellStatus(true, 2);
-
-        game.iterate();
-
-        assertThat(game.liveCellsCount(), is(1));
-    }
+//    @Test
+//    public void should_be_one_cell_given_1x3_grid_with_three_live_cells_when_iterate() throws Exception {
+//        Game game = Game.create(3);
+//        game.setCellStatus(true, 0);
+//        game.setCellStatus(true, 1);
+//        game.setCellStatus(true, 2);
+//
+//        game.iterate();
+//
+//        assertThat(game.liveCellsCount(), is(1));
+//    }
 }

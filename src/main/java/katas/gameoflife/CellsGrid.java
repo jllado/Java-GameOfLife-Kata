@@ -32,4 +32,18 @@ public class CellsGrid {
         int leftPosition = position - 1;
         return leftPosition >= 0 && cells[(leftPosition)];
     }
+
+    public static CellsGrid createCopy(CellsGrid cellsGrid) {
+        CellsGrid cellsGridCopy = new CellsGrid(cellsGrid.height());
+        System.arraycopy(cellsGrid.cells, 0, cellsGridCopy.cells, 0, cellsGrid.height());
+        return cellsGridCopy;
+    }
+
+    public boolean isLeftNotAlive(int position) {
+        return !isLeftAlive(position);
+    }
+
+    public boolean isRightNotAlive(int position) {
+        return !isRightAlive(position);
+    }
 }

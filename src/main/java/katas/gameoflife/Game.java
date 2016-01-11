@@ -5,7 +5,7 @@ package katas.gameoflife;
  */
 public class Game {
 
-    private final CellsGrid cellsGrid;
+    private CellsGrid cellsGrid;
 
     public static Game create(int height) {
         return new Game(height);
@@ -32,8 +32,12 @@ public class Game {
     }
 
     public void iterate() {
-        for (int i = 0; i < cellsGrid.height(); i++) {
-            cellsGrid.setStatus(false, i);
+        CellsGrid newCellsGrid = CellsGrid.createCopy(cellsGrid);
+        for (int position = 0; position < cellsGrid.height(); position++) {
+            if (cellsGrid.isLeftNotAlive(position) || cellsGrid.isRightNotAlive(position)) {
+                newCellsGrid.setStatus(false, position);
+            }
         }
+        cellsGrid = newCellsGrid;
     }
 }

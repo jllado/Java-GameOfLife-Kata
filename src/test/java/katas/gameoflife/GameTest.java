@@ -25,7 +25,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x1_grid_with_one_live_cell() throws Exception {
-        Grid grid = Grid.create(true);
+        Grid grid = Grid.create(true, 1);
 
         assertThat(grid.width(), is(1));
         assertThat(grid.height(), is(1));
@@ -34,7 +34,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x1_grid_with_zero_live_cells() throws Exception {
-        Grid grid = Grid.create(false);
+        Grid grid = Grid.create(false, 1);
 
         assertThat(grid.width(), is(1));
         assertThat(grid.height(), is(1));
@@ -43,10 +43,10 @@ public class GameTest {
 
     @Test
     public void should_create_1x2_grid_with_one_live_cell() throws Exception {
-        Grid grid = Grid.create(false);
+        Grid grid = Grid.create(true, 2);
 
         assertThat(grid.width(), is(1));
         assertThat(grid.height(), is(2));
-        assertThat(grid.liveCellsCount(), is(0));
+        assertThat(grid.liveCellsCount(), is(1));
     }
 }

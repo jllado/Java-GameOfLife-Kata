@@ -6,21 +6,23 @@ package katas.gameoflife;
 public class Grid {
 
     private boolean isCellAlive;
+    private int height;
 
-    public static Grid create(boolean isCellAlive) {
-        return new Grid(isCellAlive);
+    public static Grid create(boolean isCellAlive, int height) {
+        return new Grid(isCellAlive, height);
     }
 
-    public Grid(boolean isCellAlive) {
+    public Grid(boolean isCellAlive, int height) {
         this.isCellAlive = isCellAlive;
-    }
-
-    public int height() {
-        return 1;
+        this.height = height;
     }
 
     public int width() {
         return 1;
+    }
+
+    public int height() {
+        return height;
     }
 
     public int liveCellsCount() {

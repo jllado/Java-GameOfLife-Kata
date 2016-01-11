@@ -26,6 +26,15 @@ public class GridTest {
     }
 
     @Test
+    public void should_right_position_be_alive_given_1x3_grid() throws Exception {
+        CellsGrid cellsGrid = new CellsGrid(3);
+        cellsGrid.setStatus(true, 2);
+
+        assertThat(cellsGrid.isRightAlive(1), is(true));
+    }
+
+
+    @Test
     public void should_left_position_be_alive_given_1x2_grid() throws Exception {
         CellsGrid cellsGrid = new CellsGrid(2);
         cellsGrid.setStatus(true, 0);

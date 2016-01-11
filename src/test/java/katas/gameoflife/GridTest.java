@@ -57,4 +57,14 @@ public class GridTest {
 
         assertThat(cellsGrid.isLeftAlive(2), is(true));
     }
+
+    @Test
+    public void should_left_and_right_position_be_dead_given_1x1_grid() throws Exception {
+        CellsGrid cellsGrid = new CellsGrid(1);
+
+        assertThat(cellsGrid.isLeftAlive(0), is(false));
+        assertThat(cellsGrid.isRightAlive(0), is(false));
+    }
+
+
 }

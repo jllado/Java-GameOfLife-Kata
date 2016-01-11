@@ -24,10 +24,12 @@ public class CellsGrid {
     }
 
     public boolean isRightAlive(int position) {
-        return cells[1];
+        int rightPosition = position + 1;
+        return rightPosition < cells.length && cells[(rightPosition)];
     }
 
     public boolean isLeftAlive(int position) {
-        return cells[position - 1];
+        int leftPosition = position - 1;
+        return leftPosition >= 0 && cells[(leftPosition)];
     }
 }

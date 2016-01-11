@@ -13,9 +13,7 @@ import static org.hamcrest.Matchers.is;
 - 4. Any dead cell with exactly three live neighbours becomes a live cell.
  */
 /*
-- Given Grid 1x2 with one live cell, When iterate, Then zero live zells
-- Given Grid 1x2 with tow live cells, When iterate, Then zero live zells
-- Given Grid 1x3 with two separate live cells, When iterate, Then zero live zells
+- Given Grid 1x3 with three live cells, When iterate, Then one live cell
  */
 public class GameTest {
 
@@ -60,7 +58,7 @@ public class GameTest {
     }
 
     @Test
-    public void should_be_zero_zells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
+    public void should_be_zero_cells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
         Game game = Game.create(2);
         game.setCellStatus(true, 0);
 
@@ -70,7 +68,7 @@ public class GameTest {
     }
 
     @Test
-    public void should_be_zero_zells_given_1x2_grid_with_two_live_cells_when_iterate() throws Exception {
+    public void should_be_zero_cells_given_1x2_grid_with_two_live_cells_when_iterate() throws Exception {
         Game game = Game.create(2);
         game.setCellStatus(true, 0);
         game.setCellStatus(true, 1);
@@ -78,5 +76,17 @@ public class GameTest {
         game.iterate();
 
         assertThat(game.liveCellsCount(), is(0));
+    }
+
+    @Test
+    public void should_be_one_cell_given_1x3_grid_with_three_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(3);
+        game.setCellStatus(true, 0);
+        game.setCellStatus(true, 1);
+        game.setCellStatus(true, 2);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(1));
     }
 }

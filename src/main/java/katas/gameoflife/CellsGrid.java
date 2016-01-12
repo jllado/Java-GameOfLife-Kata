@@ -1,26 +1,27 @@
 package katas.gameoflife;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CellsGrid {
-    private boolean[][] cells;
+    private boolean[][] grid;
 
     public CellsGrid(int width, int height) {
-        this.cells = new boolean[width][height];
+        this.grid = new boolean[width][height];
     }
 
     public void setStatus(boolean alive, CellPosition position) {
-        cells[position.getX()][position.getY()] = alive;
+        grid[position.getX()][position.getY()] = alive;
     }
 
     public int height() {
-        return cells[0].length;
+        return grid[0].length;
     }
 
     public int liveCellsCount() {
         int liveCellsCount = 0;
-        for (boolean[] lineCells : cells) {
+        for (boolean[] lineCells : grid) {
             for (boolean cell : lineCells) {
                 liveCellsCount += cell ? 1 : 0;
             }
@@ -31,13 +32,13 @@ public class CellsGrid {
     public CellsGrid createCopy() {
         CellsGrid cellsGridCopy = new CellsGrid(this.width(), this.height());
         for (int xPosition = 0; xPosition < this.width(); xPosition++) {
-            System.arraycopy(this.cells[xPosition], 0, cellsGridCopy.cells[xPosition], 0, this.height());
+            System.arraycopy(this.grid[xPosition], 0, cellsGridCopy.grid[xPosition], 0, this.height());
         }
         return cellsGridCopy;
     }
 
     int width() {
-        return cells.length;
+        return grid.length;
     }
 
     public boolean isTopAlive(CellPosition position) {
@@ -45,8 +46,8 @@ public class CellsGrid {
         return topPosition.isValid(width(), height()) && isLiveCell(topPosition);
     }
 
-    private boolean isLiveCell(CellPosition position) {
-        return cells[position.getX()][position.getY()];
+    public boolean isLiveCell(CellPosition position) {
+        return grid[position.getX()][position.getY()];
     }
 
     public boolean isDownAlive(CellPosition position) {
@@ -134,4 +135,13 @@ public class CellsGrid {
         return liveNeighbourCellsCount(position) == 3;
     }
 
+    public List<CellPosition> getAllPosition() {
+        List<CellPosition> allPositions = new ArrayList<>();
+        for (int y = 0; y < height(); y++) {
+            for (int x = 0; x < width(); x++) {
+                allPositions.add(new CellPosition(x, y));
+            }
+        }
+        return allPositions;
+    }
 }

@@ -1,5 +1,8 @@
 package katas.gameoflife;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CellsGrid {
     private boolean[][] cells;
 
@@ -80,4 +83,18 @@ public class CellsGrid {
         int rightPosition = xPosition + 1;
         return rightPosition < cells.length && downPosition < cells[xPosition].length && cells[rightPosition][downPosition];
     }
+
+    public boolean hasFewerThanTwoLiveNeighbours(int xPosition, int yPosition) {
+        List<Boolean> neightbours = Arrays.asList(
+                this.isTopLeftAlive(xPosition, yPosition),
+                this.isTopAlive(xPosition, yPosition),
+                this.isTopRightAlive(xPosition, yPosition),
+                this.isLeftAlive(xPosition, yPosition),
+                this.isRightAlive(xPosition, yPosition),
+                this.isDownLeftAlive(xPosition, yPosition),
+                this.isDownAlive(xPosition, yPosition),
+                this.isDownRightAlive(xPosition, yPosition));
+        return neightbours.stream().filter(x -> x.booleanValue()).count() < 2;
+    }
+
 }

@@ -17,8 +17,10 @@ public class CellsGrid {
 
     public int liveCellsCount() {
         int liveCellsCount = 0;
-        for (boolean cell : cells[0]) {
-            liveCellsCount += cell ? 1 : 0;
+        for (boolean[] lineCells : cells) {
+            for (boolean cell : lineCells) {
+                liveCellsCount += cell ? 1 : 0;
+            }
         }
         return liveCellsCount;
     }

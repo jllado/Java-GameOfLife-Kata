@@ -12,9 +12,6 @@ import static org.hamcrest.Matchers.is;
 - 3. Any live cell with two or three live neighbours lives on to the next generation.
 - 4. Any dead cell with exactly three live neighbours becomes a live cell.
  */
-/*
-- Given Grid 1x3 with three live cells, When iterate, Then one live cell
- */
 public class GameTest {
 
     @Test
@@ -127,6 +124,18 @@ public class GameTest {
         Game game = Game.create(3, 1);
         game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 1, 0);
+        game.setCellStatus(true, 2, 0);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(1));
+    }
+
+    @Test
+    public void should_be_one_cell_given_3x3_grid_with_three_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(3, 3);
+        game.setCellStatus(true, 1, 1);
+        game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 2, 0);
 
         game.iterate();

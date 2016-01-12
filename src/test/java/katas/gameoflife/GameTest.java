@@ -123,5 +123,17 @@ public class GameTest {
     }
 
 
+    @Test
+    public void should_be_one_cell_given_3x1_grid_with_three_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(3, 1);
+        game.setCellStatus(true, 0, 0);
+        game.setCellStatus(true, 1, 0);
+        game.setCellStatus(true, 2, 0);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(1));
+    }
+
 
 }

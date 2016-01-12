@@ -5,33 +5,29 @@ package katas.gameoflife;
  */
 public class Game {
 
-    private CellsGrid cellsGrid;
+    private CellsGrid grid;
 
-    public static Game create(int width, int height) {
-        return new Game(width, height);
-    }
-
-    public Game(int width, int height) {
-        this.cellsGrid = new CellsGrid(width, height);
+    public Game(CellsGrid grid) {
+        this.grid = grid;
     }
 
     public int gridWidth() {
-        return cellsGrid.width();
+        return grid.width();
     }
 
     public int gridHeight() {
-        return cellsGrid.height();
+        return grid.height();
     }
 
     public int liveCellsCount() {
-        return cellsGrid.liveCellsCount();
+        return grid.liveCellsCount();
     }
 
-    public void setCellStatus(boolean alive, int xPosition, int position) {
-        cellsGrid.setStatus(alive, new CellPosition(xPosition, position));
+    public void setCellStatus(boolean alive, int xPosition, int yPosition) {
+        grid.setStatus(alive, new CellPosition(xPosition, yPosition));
     }
 
     public void nextGeneration() {
-        cellsGrid = cellsGrid.nextGeneration();
+        grid = grid.nextGeneration();
     }
 }

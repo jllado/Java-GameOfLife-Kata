@@ -28,7 +28,7 @@ public class Game {
     }
 
     public void setCellStatus(boolean alive, int xPosition, int position) {
-        cellsGrid.setStatus(alive, xPosition, position);
+        cellsGrid.setStatus(alive, new CellPosition(xPosition, position));
     }
 
     public void nextGeneration() {

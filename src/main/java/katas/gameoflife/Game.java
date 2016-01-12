@@ -38,6 +38,9 @@ public class Game {
                 if (cellsGrid.hasFewerThanTwoLiveNeighbours(xPosition, yPosition)) {
                     newCellsGrid.setStatus(false, xPosition, yPosition);
                 }
+                if (cellsGrid.hasMoreThanThreeLiveNeighbours(xPosition, yPosition)) {
+                    newCellsGrid.setStatus(false, xPosition, yPosition);
+                }
             }
         }
         cellsGrid = newCellsGrid;

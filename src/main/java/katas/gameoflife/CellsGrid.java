@@ -2,6 +2,7 @@ package katas.gameoflife;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CellsGrid {
     private boolean[][] cells;
@@ -85,7 +86,7 @@ public class CellsGrid {
     }
 
     public boolean hasFewerThanTwoLiveNeighbours(int xPosition, int yPosition) {
-        return getNeighboursCells(xPosition, yPosition).stream().filter(x -> x.booleanValue()).count() < 2;
+        return liveNeighbourCellsCount(xPosition, yPosition).count() < 2;
     }
 
     private List<Boolean> getNeighboursCells(int xPosition, int yPosition) {
@@ -100,4 +101,11 @@ public class CellsGrid {
                 this.isDownRightAlive(xPosition, yPosition));
     }
 
+    public boolean hasMoreThanThreeLiveNeighbours(int xPosition, int yPosition) {
+        return liveNeighbourCellsCount(xPosition, yPosition).count() > 3;
+    }
+
+    private Stream<Boolean> liveNeighbourCellsCount(int xPosition, int yPosition) {
+        return getNeighboursCells(xPosition, yPosition).stream().filter(cell -> cell);
+    }
 }

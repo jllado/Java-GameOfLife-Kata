@@ -101,4 +101,15 @@ public class GameTest {
         assertThat(game.liveCellsCount(), is(1));
     }
 
+    @Test
+    public void should_create_3x1_grid_with_two_live_cell() throws Exception {
+        Game game = Game.create(3, 1);
+        game.setCellStatus(true, 1, 0);
+        game.setCellStatus(true, 2, 0);
+
+        assertThat(game.gridWidth(), is(3));
+        assertThat(game.gridHeight(), is(1));
+        assertThat(game.liveCellsCount(), is(2));
+    }
+
 }

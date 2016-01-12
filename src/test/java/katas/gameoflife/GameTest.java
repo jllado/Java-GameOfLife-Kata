@@ -155,5 +155,20 @@ public class GameTest {
         assertThat(game.liveCellsCount(), is(1));
     }
 
+    @Test
+    public void should_be_four_cells_given_3x2_grid_with_six_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(3, 2);
+        game.setCellStatus(true, 0, 0);
+        game.setCellStatus(true, 1, 0);
+        game.setCellStatus(true, 2, 0);
+        game.setCellStatus(true, 0, 1);
+        game.setCellStatus(true, 1, 1);
+        game.setCellStatus(true, 2, 1);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(4));
+    }
+
 
 }

@@ -85,7 +85,11 @@ public class CellsGrid {
     }
 
     public boolean hasFewerThanTwoLiveNeighbours(int xPosition, int yPosition) {
-        List<Boolean> neightbours = Arrays.asList(
+        return getNeighboursCells(xPosition, yPosition).stream().filter(x -> x.booleanValue()).count() < 2;
+    }
+
+    private List<Boolean> getNeighboursCells(int xPosition, int yPosition) {
+        return Arrays.asList(
                 this.isTopLeftAlive(xPosition, yPosition),
                 this.isTopAlive(xPosition, yPosition),
                 this.isTopRightAlive(xPosition, yPosition),
@@ -94,7 +98,6 @@ public class CellsGrid {
                 this.isDownLeftAlive(xPosition, yPosition),
                 this.isDownAlive(xPosition, yPosition),
                 this.isDownRightAlive(xPosition, yPosition));
-        return neightbours.stream().filter(x -> x.booleanValue()).count() < 2;
     }
 
 }

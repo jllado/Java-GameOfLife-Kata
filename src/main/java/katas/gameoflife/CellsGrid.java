@@ -2,7 +2,6 @@ package katas.gameoflife;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CellsGrid {
     private boolean[][] cells;
@@ -86,7 +85,7 @@ public class CellsGrid {
     }
 
     public boolean hasFewerThanTwoLiveNeighbours(int xPosition, int yPosition) {
-        return liveNeighbourCellsCount(xPosition, yPosition).count() < 2;
+        return liveNeighbourCellsCount(xPosition, yPosition) < 2;
     }
 
     private List<Boolean> getNeighboursCells(int xPosition, int yPosition) {
@@ -102,11 +101,11 @@ public class CellsGrid {
     }
 
     public boolean hasMoreThanThreeLiveNeighbours(int xPosition, int yPosition) {
-        return liveNeighbourCellsCount(xPosition, yPosition).count() > 3;
+        return liveNeighbourCellsCount(xPosition, yPosition) > 3;
     }
 
-    private Stream<Boolean> liveNeighbourCellsCount(int xPosition, int yPosition) {
-        return getNeighboursCells(xPosition, yPosition).stream().filter(cell -> cell);
+    private long liveNeighbourCellsCount(int xPosition, int yPosition) {
+        return getNeighboursCells(xPosition, yPosition).stream().filter(cell -> cell).count();
     }
 
     public CellsGrid nextGeneration() {
@@ -119,9 +118,16 @@ public class CellsGrid {
                 if (this.hasMoreThanThreeLiveNeighbours(xPosition, yPosition)) {
                     newCellsGrid.setStatus(false, xPosition, yPosition);
                 }
+                if (this.hasThreeLiveNeighbours(xPosition, yPosition)) {
+                    newCellsGrid.setStatus(true, xPosition, yPosition);
+                }
             }
         }
         return newCellsGrid;
+    }
+
+    private boolean hasThreeLiveNeighbours(int xPosition, int yPosition) {
+        return liveNeighbourCellsCount(xPosition, yPosition) == 3;
     }
 
 }

@@ -132,7 +132,7 @@ public class GameTest {
     }
 
     @Test
-    public void should_be_one_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_top_corners_when_iterate() throws Exception {
+    public void should_be_two_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_top_corners_when_iterate() throws Exception {
         Game game = Game.create(3, 3);
         game.setCellStatus(true, 1, 1);
         game.setCellStatus(true, 0, 0);
@@ -140,11 +140,11 @@ public class GameTest {
 
         game.nextGeneration();
 
-        assertThat(game.liveCellsCount(), is(1));
+        assertThat(game.liveCellsCount(), is(2));
     }
 
     @Test
-    public void should_be_one_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_bottom_corners_when_iterate() throws Exception {
+    public void should_be_two_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_bottom_corners_when_iterate() throws Exception {
         Game game = Game.create(3, 3);
         game.setCellStatus(true, 1, 1);
         game.setCellStatus(true, 0, 2);
@@ -152,7 +152,7 @@ public class GameTest {
 
         game.nextGeneration();
 
-        assertThat(game.liveCellsCount(), is(1));
+        assertThat(game.liveCellsCount(), is(2));
     }
 
     @Test

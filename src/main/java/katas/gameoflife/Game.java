@@ -33,9 +33,11 @@ public class Game {
 
     public void iterate() {
         CellsGrid newCellsGrid = CellsGrid.createCopy(cellsGrid);
-        for (int position = 0; position < cellsGrid.height(); position++) {
-            if (cellsGrid.isLeftNotAlive(position) || cellsGrid.isRightNotAlive(position)) {
-                newCellsGrid.setStatus(false, 0, position);
+        for (int xPosition = 0; xPosition < cellsGrid.width(); xPosition++) {
+            for (int yPosition = 0; yPosition < cellsGrid.height(); yPosition++) {
+                if (cellsGrid.isLeftNotAlive(yPosition) || cellsGrid.isRightNotAlive(yPosition)) {
+                    newCellsGrid.setStatus(false, xPosition, yPosition);
+                }
             }
         }
         cellsGrid = newCellsGrid;

@@ -68,4 +68,16 @@ public class CellsGrid {
         int rightPosition = xPosition + 1;
         return rightPosition < cells.length && topPosition >= 0 && cells[rightPosition][topPosition];
     }
+
+    public boolean isDownLeftAlive(int xPosition, int yPosition) {
+        int downPosition = yPosition + 1;
+        int leftPosition = xPosition - 1;
+        return leftPosition >= 0 && downPosition < cells[xPosition].length && cells[leftPosition][downPosition];
+    }
+
+    public boolean isDownRightAlive(int xPosition, int yPosition) {
+        int downPosition = yPosition + 1;
+        int rightPosition = xPosition + 1;
+        return rightPosition < cells.length && downPosition < cells[xPosition].length && cells[rightPosition][downPosition];
+    }
 }

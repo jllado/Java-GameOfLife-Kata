@@ -50,7 +50,9 @@ public class Game {
         liveNeightboursCount += cellsGrid.isTopRightAlive(xPosition, yPosition) ? 1 : 0;
         liveNeightboursCount += cellsGrid.isLeftAlive(xPosition, yPosition) ? 1 : 0;
         liveNeightboursCount += cellsGrid.isRightAlive(xPosition, yPosition) ? 1 : 0;
+        liveNeightboursCount += cellsGrid.isDownLeftAlive(xPosition, yPosition) ? 1 : 0;
         liveNeightboursCount += cellsGrid.isDownAlive(xPosition, yPosition) ? 1 : 0;
+        liveNeightboursCount += cellsGrid.isDownRightAlive(xPosition, yPosition) ? 1 : 0;
         return liveNeightboursCount < 2;
     }
 }

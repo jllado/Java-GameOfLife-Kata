@@ -59,7 +59,7 @@ public class GameTest {
 
     @Test
     public void should_be_zero_cells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
-        Game game = Game.create(2, 2);
+        Game game = Game.create(1, 2);
         game.setCellStatus(true, 0, 0);
 
         game.iterate();
@@ -69,7 +69,7 @@ public class GameTest {
 
     @Test
     public void should_be_zero_cells_given_1x2_grid_with_two_live_cells_when_iterate() throws Exception {
-        Game game = Game.create(2, 2);
+        Game game = Game.create(1, 2);
         game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 0, 1);
 
@@ -80,7 +80,7 @@ public class GameTest {
 
     @Test
     public void should_be_one_cell_given_1x3_grid_with_three_live_cells_when_iterate() throws Exception {
-        Game game = Game.create(2, 3);
+        Game game = Game.create(1, 3);
         game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 0, 1);
         game.setCellStatus(true, 0, 2);
@@ -111,5 +111,17 @@ public class GameTest {
         assertThat(game.gridHeight(), is(1));
         assertThat(game.liveCellsCount(), is(2));
     }
+
+    @Test
+    public void should_be_zero_cells_given_2x1_grid_with_one_live_cells_when_iterate() throws Exception {
+        Game game = Game.create(2, 1);
+        game.setCellStatus(true, 1, 0);
+
+        game.iterate();
+
+        assertThat(game.liveCellsCount(), is(0));
+    }
+
+
 
 }

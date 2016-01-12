@@ -35,11 +35,20 @@ public class Game {
         CellsGrid newCellsGrid = CellsGrid.createCopy(cellsGrid);
         for (int xPosition = 0; xPosition < cellsGrid.width(); xPosition++) {
             for (int yPosition = 0; yPosition < cellsGrid.height(); yPosition++) {
-                if (cellsGrid.isLeftNotAlive(yPosition) || cellsGrid.isRightNotAlive(yPosition)) {
+                if (hasFewerThanTwoLiveNeighbours(xPosition, yPosition)) {
                     newCellsGrid.setStatus(false, xPosition, yPosition);
                 }
             }
         }
         cellsGrid = newCellsGrid;
+    }
+
+    private boolean hasFewerThanTwoLiveNeighbours(int xPosition, int yPosition) {
+        int liveNeightboursCount = 0;
+        liveNeightboursCount += cellsGrid.isTopAlive(xPosition, yPosition) ? 1 : 0;
+        liveNeightboursCount += cellsGrid.isDownAlive(xPosition, yPosition) ? 1 : 0;
+        liveNeightboursCount += cellsGrid.isLeftAlive(xPosition, yPosition) ? 1 : 0;
+        liveNeightboursCount += cellsGrid.isRightAlive(xPosition, yPosition) ? 1 : 0;
+        return liveNeightboursCount < 2;
     }
 }

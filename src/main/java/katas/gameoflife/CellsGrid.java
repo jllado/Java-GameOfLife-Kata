@@ -25,16 +25,6 @@ public class CellsGrid {
         return liveCellsCount;
     }
 
-    public boolean isRightAlive(int position) {
-        int rightPosition = position + 1;
-        return rightPosition < cells[0].length && cells[0][rightPosition];
-    }
-
-    public boolean isLeftAlive(int position) {
-        int leftPosition = position - 1;
-        return leftPosition >= 0 && cells[0][leftPosition];
-    }
-
     public static CellsGrid createCopy(CellsGrid cellsGrid) {
         CellsGrid cellsGridCopy = new CellsGrid(cellsGrid.width(), cellsGrid.height());
         for (int i = 0; i < cellsGrid.cells.length; i++) {
@@ -47,11 +37,24 @@ public class CellsGrid {
         return cells.length;
     }
 
-    public boolean isLeftNotAlive(int position) {
-        return !isLeftAlive(position);
+    public boolean isTopAlive(int xPosition, int yPosition) {
+        int leftPosition = yPosition - 1;
+        return leftPosition >= 0 && cells[xPosition][leftPosition];
     }
 
-    public boolean isRightNotAlive(int position) {
-        return !isRightAlive(position);
+    public boolean isDownAlive(int xPosition, int yPosition) {
+        int rightPosition = yPosition + 1;
+        return rightPosition < cells[xPosition].length && cells[xPosition][rightPosition];
     }
+
+    public boolean isLeftAlive(int xPosition, int yPosition) {
+        int leftPosition = xPosition - 1;
+        return leftPosition >= 0 && cells[leftPosition][yPosition];
+    }
+
+    public boolean isRightAlive(int xPosition, int yPosition) {
+        int rightPosition = xPosition + 1;
+        return rightPosition < cells.length && cells[rightPosition][yPosition];
+    }
+
 }

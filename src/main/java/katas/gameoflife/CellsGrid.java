@@ -29,10 +29,10 @@ public class CellsGrid {
         return liveCellsCount;
     }
 
-    public static CellsGrid createCopy(CellsGrid cellsGrid) {
-        CellsGrid cellsGridCopy = new CellsGrid(cellsGrid.width(), cellsGrid.height());
-        for (int i = 0; i < cellsGrid.cells.length; i++) {
-            System.arraycopy(cellsGrid.cells[i], 0, cellsGridCopy.cells[i], 0, cellsGrid.height());
+    public CellsGrid createCopy() {
+        CellsGrid cellsGridCopy = new CellsGrid(this.width(), this.height());
+        for (int xPosition = 0; xPosition < this.width(); xPosition++) {
+            System.arraycopy(this.cells[xPosition], 0, cellsGridCopy.cells[xPosition], 0, this.height());
         }
         return cellsGridCopy;
     }
@@ -108,4 +108,20 @@ public class CellsGrid {
     private Stream<Boolean> liveNeighbourCellsCount(int xPosition, int yPosition) {
         return getNeighboursCells(xPosition, yPosition).stream().filter(cell -> cell);
     }
+
+    public CellsGrid nextGeneration() {
+        CellsGrid newCellsGrid = this.createCopy();
+        for (int xPosition = 0; xPosition < this.width(); xPosition++) {
+            for (int yPosition = 0; yPosition < this.height(); yPosition++) {
+                if (this.hasFewerThanTwoLiveNeighbours(xPosition, yPosition)) {
+                    newCellsGrid.setStatus(false, xPosition, yPosition);
+                }
+                if (this.hasMoreThanThreeLiveNeighbours(xPosition, yPosition)) {
+                    newCellsGrid.setStatus(false, xPosition, yPosition);
+                }
+            }
+        }
+        return newCellsGrid;
+    }
+
 }

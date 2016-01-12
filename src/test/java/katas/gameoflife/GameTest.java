@@ -59,7 +59,7 @@ public class GameTest {
         Game game = Game.create(1, 2);
         game.setCellStatus(true, 0, 0);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(0));
     }
@@ -70,7 +70,7 @@ public class GameTest {
         game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 0, 1);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(0));
     }
@@ -82,7 +82,7 @@ public class GameTest {
         game.setCellStatus(true, 0, 1);
         game.setCellStatus(true, 0, 2);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(1));
     }
@@ -114,7 +114,7 @@ public class GameTest {
         Game game = Game.create(2, 1);
         game.setCellStatus(true, 1, 0);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(0));
     }
@@ -126,7 +126,7 @@ public class GameTest {
         game.setCellStatus(true, 1, 0);
         game.setCellStatus(true, 2, 0);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(1));
     }
@@ -138,7 +138,7 @@ public class GameTest {
         game.setCellStatus(true, 0, 0);
         game.setCellStatus(true, 2, 0);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(1));
     }
@@ -150,7 +150,7 @@ public class GameTest {
         game.setCellStatus(true, 0, 2);
         game.setCellStatus(true, 2, 2);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(1));
     }
@@ -165,7 +165,7 @@ public class GameTest {
         game.setCellStatus(true, 1, 1);
         game.setCellStatus(true, 2, 1);
 
-        game.iterate();
+        game.nextGeneration();
 
         assertThat(game.liveCellsCount(), is(4));
     }

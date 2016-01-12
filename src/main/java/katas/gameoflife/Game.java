@@ -31,18 +31,7 @@ public class Game {
         cellsGrid.setStatus(alive, xPosition, position);
     }
 
-    public void iterate() {
-        CellsGrid newCellsGrid = CellsGrid.createCopy(cellsGrid);
-        for (int xPosition = 0; xPosition < cellsGrid.width(); xPosition++) {
-            for (int yPosition = 0; yPosition < cellsGrid.height(); yPosition++) {
-                if (cellsGrid.hasFewerThanTwoLiveNeighbours(xPosition, yPosition)) {
-                    newCellsGrid.setStatus(false, xPosition, yPosition);
-                }
-                if (cellsGrid.hasMoreThanThreeLiveNeighbours(xPosition, yPosition)) {
-                    newCellsGrid.setStatus(false, xPosition, yPosition);
-                }
-            }
-        }
-        cellsGrid = newCellsGrid;
+    public void nextGeneration() {
+        cellsGrid = cellsGrid.nextGeneration();
     }
 }

@@ -124,17 +124,25 @@ public class CellsGrid {
         for (int xPosition = 0; xPosition < this.width(); xPosition++) {
             for (int yPosition = 0; yPosition < this.height(); yPosition++) {
                 if (this.hasFewerThanTwoLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.setStatus(false, new CellPosition(xPosition, yPosition));
+                    newCellsGrid.killCell(new CellPosition(xPosition, yPosition));
                 }
                 if (this.hasMoreThanThreeLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.setStatus(false, new CellPosition(xPosition, yPosition));
+                    newCellsGrid.killCell(new CellPosition(xPosition, yPosition));
                 }
                 if (this.hasThreeLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.setStatus(true, new CellPosition(xPosition, yPosition));
+                    newCellsGrid.reviveCell(new CellPosition(xPosition, yPosition));
                 }
             }
         }
         return newCellsGrid;
+    }
+
+    private void reviveCell(CellPosition position) {
+        setStatus(true, position);
+    }
+
+    private void killCell(CellPosition position) {
+        setStatus(false, position);
     }
 
     private boolean hasThreeLiveNeighbours(CellPosition position) {

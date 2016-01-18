@@ -17,20 +17,14 @@ public class CellsGrid {
         }
     }
 
-    public void setStatus(boolean alive, CellPosition position) {
-        grid[position.getX()][position.getY()] = new Cell(alive, position);
-    }
-
     public int height() {
         return grid[0].length;
     }
 
     public int liveCellsCount() {
         int liveCellsCount = 0;
-        for (Cell[] cellsLine : grid) {
-            for (Cell cell : cellsLine) {
-                liveCellsCount += cell.isAlive() ? 1 : 0;
-            }
+        for (Cell cell : getAllCells()) {
+            liveCellsCount += cell.isAlive() ? 1 : 0;
         }
         return liveCellsCount;
     }
@@ -121,35 +115,37 @@ public class CellsGrid {
 
     public CellsGrid nextGeneration() {
         CellsGrid newCellsGrid = this.createCopy();
-        for (int xPosition = 0; xPosition < this.width(); xPosition++) {
-            for (int yPosition = 0; yPosition < this.height(); yPosition++) {
-                if (this.hasFewerThanTwoLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.killCell(new CellPosition(xPosition, yPosition));
-                }
-                if (this.hasMoreThanThreeLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.killCell(new CellPosition(xPosition, yPosition));
-                }
-                if (this.hasThreeLiveNeighbours(new CellPosition(xPosition, yPosition))) {
-                    newCellsGrid.reviveCell(new CellPosition(xPosition, yPosition));
-                }
+        for (Cell cell : getAllCells()) {
+            if (this.hasFewerThanTwoLiveNeighbours(cell.getPosition())) {
+                newCellsGrid.killCell(cell.getPosition());
+            }
+            if (this.hasMoreThanThreeLiveNeighbours(cell.getPosition())) {
+                newCellsGrid.killCell(cell.getPosition());
+            }
+            if (this.hasThreeLiveNeighbours(cell.getPosition())) {
+                newCellsGrid.reviveCell(cell.getPosition());
             }
         }
         return newCellsGrid;
     }
 
     public void reviveCell(CellPosition position) {
-        grid[position.getX()][position.getY()] = getCell(position).revive();
+        setCell(getCell(position).revive());
     }
 
     public void killCell(CellPosition position) {
-        grid[position.getX()][position.getY()] = getCell(position).kill();
+        setCell(getCell(position).kill());
+    }
+
+    private void setCell(Cell cell) {
+        grid[cell.getPosition().getX()][cell.getPosition().getY()] = cell;
     }
 
     private boolean hasThreeLiveNeighbours(CellPosition position) {
         return liveNeighbourCellsCount(position) == 3;
     }
 
-    public List<Cell> getAllPosition() {
+    public List<Cell> getAllCells() {
         List<Cell> cells = new ArrayList<>();
         for (int y = 0; y < height(); y++) {
             for (int x = 0; x < width(); x++) {
@@ -167,7 +163,7 @@ public class CellsGrid {
         List<CellsLine> cellsLines = new ArrayList<>();
         Cell firstLineCell = getFirstCell();
         CellsLine cellsLine = new CellsLine();
-        for (Cell cell : getAllPosition()) {
+        for (Cell cell : getAllCells()) {
             if (cell.isSameLine(firstLineCell)) {
                 cellsLine.add(cell);
             } else {

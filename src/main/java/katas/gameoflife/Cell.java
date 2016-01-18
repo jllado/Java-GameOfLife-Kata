@@ -16,12 +16,8 @@ public class Cell {
         return alive;
     }
 
-    public int getX() {
-        return position.getX();
-    }
-
-    public int getY() {
-        return position.getY();
+    public CellPosition getPosition() {
+        return position;
     }
 
     @Override

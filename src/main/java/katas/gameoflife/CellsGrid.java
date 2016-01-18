@@ -3,6 +3,7 @@ package katas.gameoflife;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CellsGrid {
     private boolean[][] grid;
@@ -148,5 +149,25 @@ public class CellsGrid {
     public CellPosition getFirstPosition() {
         return new CellPosition(0, 0);
     }
+
+
+    public List<CellsLine> getCellsLines() {
+        List<CellsLine> cellsLines = new ArrayList<>();
+        CellPosition firstLinePosition = getFirstPosition();
+        CellsLine cellsLine = new CellsLine();
+        for (CellPosition position : getAllPosition()) {
+            if (position.isSameLine(firstLinePosition)) {
+                cellsLine.add(position);
+            } else {
+                cellsLines.add(cellsLine);
+                cellsLine = new CellsLine();
+                firstLinePosition = position;
+                cellsLine.add(firstLinePosition);
+            }
+        }
+        cellsLines.add(cellsLine);
+        return cellsLines;
+    }
+
 
 }

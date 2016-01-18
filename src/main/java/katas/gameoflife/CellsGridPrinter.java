@@ -20,7 +20,7 @@ public class CellsGridPrinter {
         CellPosition firstLinePosition = grid.getFirstPosition();
         consolePrinter.print(String.format("Generation %d:", generation));
         for (CellPosition position : grid.getAllPosition()) {
-            if (firstLinePosition.getY() == position.getY()) {
+            if (isSameLine(firstLinePosition, position)) {
                 line.add(printCell(grid.isLiveCell(position)));
             } else {
                 consolePrinter.print(line.stream().collect(Collectors.joining(" ")));
@@ -31,6 +31,10 @@ public class CellsGridPrinter {
         }
         consolePrinter.print(line.stream().collect(Collectors.joining(" ")));
         waitBetweenPrints();
+    }
+
+    private boolean isSameLine(CellPosition firstLinePosition, CellPosition position) {
+        return firstLinePosition.getY() == position.getY();
     }
 
     private void waitBetweenPrints() {

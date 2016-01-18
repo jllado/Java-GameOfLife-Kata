@@ -7,6 +7,8 @@ import java.util.List;
 public class CellsGrid {
     private boolean[][] grid;
 
+    private Cell[][] cells;
+
     public CellsGrid(int width, int height) {
         this.grid = new boolean[width][height];
     }
@@ -156,12 +158,12 @@ public class CellsGrid {
         CellsLine cellsLine = new CellsLine();
         for (CellPosition position : getAllPosition()) {
             if (position.isSameLine(firstLinePosition)) {
-                cellsLine.add(position);
+                cellsLine.add(new Cell(isLiveCell(position)));
             } else {
                 cellsLines.add(cellsLine);
                 cellsLine = new CellsLine();
                 firstLinePosition = position;
-                cellsLine.add(firstLinePosition);
+                cellsLine.add(new Cell(isLiveCell(firstLinePosition)));
             }
         }
         cellsLines.add(cellsLine);

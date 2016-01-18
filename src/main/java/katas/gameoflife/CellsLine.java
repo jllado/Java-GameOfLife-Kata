@@ -8,21 +8,21 @@ import java.util.List;
  */
 public class CellsLine {
 
-    private List<CellPosition> cellPositions;
+    private List<Cell> cells;
 
     public CellsLine() {
-        cellPositions = new ArrayList<>();
+        cells = new ArrayList<>();
     }
 
     public int size() {
-        return cellPositions.size();
+        return cells.size();
     }
 
-    public List<CellPosition> getCellPositions() {
-        return cellPositions;
+    public List<Cell> getCells() {
+        return cells;
     }
 
-    public void add(CellPosition position) {
-        cellPositions.add(position);
+    public void add(Cell cell) {
+        cells.add(cell);
     }
 }

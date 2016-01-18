@@ -16,15 +16,13 @@ public class CellsGridPrinter {
     public void print(CellsGrid grid, int generation) {
         consolePrinter.print(String.format("Generation %d:", generation));
         for (CellsLine cellsLine : grid.getCellsLines()) {
-            consolePrinter.print(mapToString(cellsLine, grid));
+            consolePrinter.print(mapToString(cellsLine));
         }
         waitBetweenPrints();
     }
 
-    private String mapToString(CellsLine cellsLine, CellsGrid grid) {
-        return cellsLine.getCellPositions().stream()
-                .map(cellPosition -> printCell(grid.isLiveCell(cellPosition)))
-                .collect(Collectors.joining(" "));
+    private String mapToString(CellsLine cellsLine) {
+        return cellsLine.getCells().stream().map(cell -> printCell(cell)).collect(Collectors.joining(" "));
     }
 
     private void waitBetweenPrints() {
@@ -35,8 +33,8 @@ public class CellsGridPrinter {
         }
     }
 
-    private String printCell(boolean liveCell) {
-        return liveCell ? "*" : "_";
+    private String printCell(Cell cell) {
+        return cell.isAlive() ? "*" : "_";
     }
 
 }

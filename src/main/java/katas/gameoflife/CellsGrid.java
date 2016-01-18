@@ -5,16 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CellsGrid {
-    private boolean[][] grid;
 
-    private Cell[][] cells;
+    private Cell[][] grid;
 
     public CellsGrid(int width, int height) {
-        this.grid = new boolean[width][height];
+        this.grid = new Cell[width][height];
+        for (Cell[] cellsLine : this.grid) {
+            for (int linePosition = 0; linePosition < cellsLine.length; linePosition++) {
+                cellsLine[linePosition] = new Cell(false);
+            }
+        }
     }
 
     public void setStatus(boolean alive, CellPosition position) {
-        grid[position.getX()][position.getY()] = alive;
+        grid[position.getX()][position.getY()] = new Cell(alive);
     }
 
     public int height() {
@@ -23,9 +27,9 @@ public class CellsGrid {
 
     public int liveCellsCount() {
         int liveCellsCount = 0;
-        for (boolean[] lineCells : grid) {
-            for (boolean cell : lineCells) {
-                liveCellsCount += cell ? 1 : 0;
+        for (Cell[] cellsLine : grid) {
+            for (Cell cell : cellsLine) {
+                liveCellsCount += cell.isAlive() ? 1 : 0;
             }
         }
         return liveCellsCount;
@@ -45,50 +49,50 @@ public class CellsGrid {
 
     public boolean isTopAlive(CellPosition position) {
         CellPosition topPosition = position.topPosition();
-        return topPosition.isValid(width(), height()) && isLiveCell(topPosition);
+        return topPosition.isValid(width(), height()) && getCell(topPosition).isAlive();
     }
 
-    public boolean isLiveCell(CellPosition position) {
+    private Cell getCell(CellPosition position) {
         return grid[position.getX()][position.getY()];
     }
 
     public boolean isDownAlive(CellPosition position) {
         int downPosition = position.getY() + 1;
-        return downPosition < height() && isLiveCell(new CellPosition(position.getX(), downPosition));
+        return downPosition < height() && getCell(new CellPosition(position.getX(), downPosition)).isAlive();
     }
 
     public boolean isLeftAlive(CellPosition position) {
         int leftPosition = position.getX() - 1;
-        return leftPosition >= 0 && isLiveCell(new CellPosition(leftPosition, position.getY()));
+        return leftPosition >= 0 && getCell(new CellPosition(leftPosition, position.getY())).isAlive();
     }
 
     public boolean isRightAlive(CellPosition position) {
         int rightPosition = position.getX() + 1;
-        return rightPosition < width() && isLiveCell(new CellPosition(rightPosition, position.getY()));
+        return rightPosition < width() && getCell(new CellPosition(rightPosition, position.getY())).isAlive();
     }
 
     public boolean isTopLeftAlive(CellPosition position) {
         int topPosition = position.getY() - 1;
         int leftPosition = position.getX() - 1;
-        return leftPosition >= 0 && topPosition >= 0 && isLiveCell(new CellPosition(leftPosition, topPosition));
+        return leftPosition >= 0 && topPosition >= 0 && getCell(new CellPosition(leftPosition, topPosition)).isAlive();
     }
 
     public boolean isTopRightAlive(CellPosition position) {
         int topPosition = position.getY() - 1;
         int rightPosition = position.getX() + 1;
-        return rightPosition < width() && topPosition >= 0 && isLiveCell(new CellPosition(rightPosition, topPosition));
+        return rightPosition < width() && topPosition >= 0 && getCell(new CellPosition(rightPosition, topPosition)).isAlive();
     }
 
     public boolean isDownLeftAlive(CellPosition position) {
         int downPosition = position.getY() + 1;
         int leftPosition = position.getX() - 1;
-        return leftPosition >= 0 && downPosition < height() && isLiveCell(new CellPosition(leftPosition, downPosition));
+        return leftPosition >= 0 && downPosition < height() && getCell(new CellPosition(leftPosition, downPosition)).isAlive();
     }
 
     public boolean isDownRightAlive(CellPosition position) {
         int downPosition = position.getY() + 1;
         int rightPosition = position.getX() + 1;
-        return rightPosition < width() && downPosition < height() && isLiveCell(new CellPosition(rightPosition, downPosition));
+        return rightPosition < width() && downPosition < height() && getCell(new CellPosition(rightPosition, downPosition)).isAlive();
     }
 
     public boolean hasFewerThanTwoLiveNeighbours(CellPosition position) {
@@ -151,24 +155,22 @@ public class CellsGrid {
         return new CellPosition(0, 0);
     }
 
-
     public List<CellsLine> getCellsLines() {
         List<CellsLine> cellsLines = new ArrayList<>();
         CellPosition firstLinePosition = getFirstPosition();
         CellsLine cellsLine = new CellsLine();
         for (CellPosition position : getAllPosition()) {
             if (position.isSameLine(firstLinePosition)) {
-                cellsLine.add(new Cell(isLiveCell(position)));
+                cellsLine.add(new Cell(getCell(position).isAlive()));
             } else {
                 cellsLines.add(cellsLine);
                 cellsLine = new CellsLine();
                 firstLinePosition = position;
-                cellsLine.add(new Cell(isLiveCell(firstLinePosition)));
+                cellsLine.add(new Cell(getCell(firstLinePosition).isAlive()));
             }
         }
         cellsLines.add(cellsLine);
         return cellsLines;
     }
-
 
 }

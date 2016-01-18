@@ -1,7 +1,5 @@
 package katas.gameoflife;
 
-import java.util.stream.Collectors;
-
 /**
  * Created by jllado on 1/12/16.
  */
@@ -16,13 +14,9 @@ public class CellsGridPrinter {
     public void print(CellsGrid grid, int generation) {
         consolePrinter.print(String.format("Generation %d:", generation));
         for (CellsLine cellsLine : grid.getCellsLines()) {
-            consolePrinter.print(mapToString(cellsLine));
+            consolePrinter.print(cellsLine.toString());
         }
         waitBetweenPrints();
-    }
-
-    private String mapToString(CellsLine cellsLine) {
-        return cellsLine.getCells().stream().map(cell -> printCell(cell)).collect(Collectors.joining(" "));
     }
 
     private void waitBetweenPrints() {
@@ -31,10 +25,6 @@ public class CellsGridPrinter {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private String printCell(Cell cell) {
-        return cell.isAlive() ? "*" : "_";
     }
 
 }

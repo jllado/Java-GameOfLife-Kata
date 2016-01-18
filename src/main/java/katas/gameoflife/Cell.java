@@ -53,9 +53,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "Cell{" +
-                "alive=" + alive +
-                ", position=" + position +
-                '}';
+        return isAlive() ? "*" : "_";
     }
 }

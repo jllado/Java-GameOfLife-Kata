@@ -2,6 +2,7 @@ package katas.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by jllado on 1/18/16.
@@ -24,5 +25,10 @@ public class CellsLine {
 
     public void add(Cell cell) {
         cells.add(cell);
+    }
+
+    @Override
+    public String toString() {
+        return cells.stream().map(cell -> cell.toString()).collect(Collectors.joining(" "));
     }
 }

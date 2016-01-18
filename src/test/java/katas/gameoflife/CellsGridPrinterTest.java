@@ -21,9 +21,9 @@ public class CellsGridPrinterTest {
     public void print() throws Exception {
         CellsGridPrinter printer = new CellsGridPrinter(consolePrinter);
         CellsGrid grid = new CellsGrid(3, 3);
-        grid.setStatus(true, new CellPosition(0, 0));
-        grid.setStatus(true, new CellPosition(1, 1));
-        grid.setStatus(true, new CellPosition(2, 2));
+        grid.reviveCell(new CellPosition(0, 0));
+        grid.reviveCell(new CellPosition(1, 1));
+        grid.reviveCell(new CellPosition(2, 2));
 
         printer.print(grid, 0);
 

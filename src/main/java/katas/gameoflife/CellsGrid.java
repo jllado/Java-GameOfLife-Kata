@@ -10,15 +10,15 @@ public class CellsGrid {
 
     public CellsGrid(int width, int height) {
         this.grid = new Cell[width][height];
-        for (Cell[] cellsLine : this.grid) {
-            for (int linePosition = 0; linePosition < cellsLine.length; linePosition++) {
-                cellsLine[linePosition] = new Cell(false);
+        for (int x = 0; x < this.grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                grid[x][y] = new Cell(false, new CellPosition(x, y));
             }
         }
     }
 
     public void setStatus(boolean alive, CellPosition position) {
-        grid[position.getX()][position.getY()] = new Cell(alive);
+        grid[position.getX()][position.getY()] = new Cell(alive, position);
     }
 
     public int height() {
@@ -137,44 +137,44 @@ public class CellsGrid {
         return newCellsGrid;
     }
 
-    private void reviveCell(CellPosition position) {
-        setStatus(true, position);
+    public void reviveCell(CellPosition position) {
+        grid[position.getX()][position.getY()] = getCell(position).revive();
     }
 
-    private void killCell(CellPosition position) {
-        setStatus(false, position);
+    public void killCell(CellPosition position) {
+        grid[position.getX()][position.getY()] = getCell(position).kill();
     }
 
     private boolean hasThreeLiveNeighbours(CellPosition position) {
         return liveNeighbourCellsCount(position) == 3;
     }
 
-    public List<CellPosition> getAllPosition() {
-        List<CellPosition> allPositions = new ArrayList<>();
+    public List<Cell> getAllPosition() {
+        List<Cell> cells = new ArrayList<>();
         for (int y = 0; y < height(); y++) {
             for (int x = 0; x < width(); x++) {
-                allPositions.add(new CellPosition(x, y));
+                cells.add(getCell(new CellPosition(x, y)));
             }
         }
-        return allPositions;
+        return cells;
     }
 
-    public CellPosition getFirstPosition() {
-        return new CellPosition(0, 0);
+    public Cell getFirstCell() {
+        return getCell(new CellPosition(0, 0));
     }
 
     public List<CellsLine> getCellsLines() {
         List<CellsLine> cellsLines = new ArrayList<>();
-        CellPosition firstLinePosition = getFirstPosition();
+        Cell firstLineCell = getFirstCell();
         CellsLine cellsLine = new CellsLine();
-        for (CellPosition position : getAllPosition()) {
-            if (position.isSameLine(firstLinePosition)) {
-                cellsLine.add(new Cell(getCell(position).isAlive()));
+        for (Cell cell : getAllPosition()) {
+            if (cell.isSameLine(firstLineCell)) {
+                cellsLine.add(cell);
             } else {
                 cellsLines.add(cellsLine);
                 cellsLine = new CellsLine();
-                firstLinePosition = position;
-                cellsLine.add(new Cell(getCell(firstLinePosition).isAlive()));
+                firstLineCell = cell;
+                cellsLine.add(firstLineCell);
             }
         }
         cellsLines.add(cellsLine);

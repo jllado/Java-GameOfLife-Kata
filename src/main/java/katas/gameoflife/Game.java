@@ -41,11 +41,11 @@ public class Game {
 
     public static void main(String[] args) throws InterruptedException {
         CellsGrid grid = new CellsGrid(5, 5);
-        grid.setStatus(true, new CellPosition(0, 0));
-        grid.setStatus(true, new CellPosition(1, 0));
-        grid.setStatus(true, new CellPosition(0, 1));
-        grid.setStatus(true, new CellPosition(1, 1));
-        grid.setStatus(true, new CellPosition(2, 1));
+        grid.reviveCell(new CellPosition(0, 0));
+        grid.reviveCell(new CellPosition(1, 0));
+        grid.reviveCell(new CellPosition(0, 1));
+        grid.reviveCell(new CellPosition(1, 1));
+        grid.reviveCell(new CellPosition(2, 1));
         Game game = new Game(grid, new CellsGridPrinter(new ConsolePrinter()));
         game.play();
 

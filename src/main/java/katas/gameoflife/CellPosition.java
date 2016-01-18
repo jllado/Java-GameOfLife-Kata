@@ -51,4 +51,12 @@ public class CellPosition {
         result = 31 * result + y;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CellPosition{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

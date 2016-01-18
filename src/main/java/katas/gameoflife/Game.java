@@ -25,10 +25,6 @@ public class Game {
         return grid.liveCellsCount();
     }
 
-    public void setCellStatus(boolean alive, int xPosition, int yPosition) {
-        grid.setStatus(alive, new CellPosition(xPosition, yPosition));
-    }
-
     public void nextGeneration() {
         grid = grid.nextGeneration();
     }

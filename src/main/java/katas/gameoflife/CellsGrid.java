@@ -148,4 +148,5 @@ public class CellsGrid {
     public CellPosition getFirstPosition() {
         return new CellPosition(0, 0);
     }
+
 }

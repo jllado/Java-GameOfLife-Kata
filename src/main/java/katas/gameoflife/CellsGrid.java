@@ -144,4 +144,8 @@ public class CellsGrid {
         }
         return allPositions;
     }
+
+    public CellPosition getFirstPosition() {
+        return new CellPosition(0, 0);
+    }
 }

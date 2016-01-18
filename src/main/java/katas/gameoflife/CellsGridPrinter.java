@@ -17,15 +17,14 @@ public class CellsGridPrinter {
 
     public void print(CellsGrid grid, int generation) {
         List<String> line = new ArrayList<>();
-        List<CellPosition> allPosition = grid.getAllPosition();
-        CellPosition firstLinePosition = allPosition.get(0);
+        CellPosition firstLinePosition = grid.getFirstPosition();
         consolePrinter.print(String.format("Generation %d:", generation));
-        for (CellPosition position : allPosition) {
+        for (CellPosition position : grid.getAllPosition()) {
             if (firstLinePosition.getY() == position.getY()) {
                 line.add(printCell(grid.isLiveCell(position)));
             } else {
                 consolePrinter.print(line.stream().collect(Collectors.joining(" ")));
-                line = new ArrayList<>();
+                line.clear();
                 line.add(printCell(grid.isLiveCell(position)));
                 firstLinePosition = position;
             }

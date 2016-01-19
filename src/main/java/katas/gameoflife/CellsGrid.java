@@ -108,17 +108,15 @@ public class CellsGrid {
 
     public List<CellsLine> getCellsLines() {
         List<CellsLine> cellsLines = new ArrayList<>();
-        Cell firstLineCell = getFirstCell();
-        CellsLine cellsLine = new CellsLine();
+        CellsLine cellsLine = new CellsLine(getFirstCell().getPosition().getY());
         for (Cell cell : getAllCells()) {
-            if (cell.isSameLine(firstLineCell)) {
+            if (cell.isSameLine(cellsLine)) {
                 cellsLine.add(cell);
-            } else {
-                cellsLines.add(cellsLine);
-                cellsLine = new CellsLine();
-                firstLineCell = cell;
-                cellsLine.add(firstLineCell);
+                continue;
             }
+            cellsLines.add(cellsLine);
+            cellsLine = new CellsLine(cell.getPosition().getY());
+            cellsLine.add(cell);
         }
         cellsLines.add(cellsLine);
         return cellsLines;

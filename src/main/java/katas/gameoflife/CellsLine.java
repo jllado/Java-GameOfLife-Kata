@@ -9,10 +9,12 @@ import java.util.stream.Collectors;
  */
 public class CellsLine {
 
+    private int line = 0;
     private List<Cell> cells;
 
-    public CellsLine() {
+    public CellsLine(int line) {
         cells = new ArrayList<>();
+        this.line = line;
     }
 
     public int size() {
@@ -30,5 +32,9 @@ public class CellsLine {
     @Override
     public String toString() {
         return cells.stream().map(cell -> cell.toString()).collect(Collectors.joining(" "));
+    }
+
+    public int getLine() {
+        return line;
     }
 }

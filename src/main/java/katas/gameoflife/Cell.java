@@ -50,8 +50,8 @@ public class Cell {
         return new Cell(false, position);
     }
 
-    public boolean isSameLine(Cell cell) {
-        return position.isSameLine(cell.position);
+    public boolean isSameLine(CellsLine cellsLine) {
+        return position.isSameLine(new CellPosition(0, cellsLine.getLine()));
     }
 
     @Override

@@ -1,5 +1,8 @@
 package katas.gameoflife;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by jllado on 1/18/16.
  */
@@ -54,5 +57,49 @@ public class Cell {
     @Override
     public String toString() {
         return isAlive() ? "*" : "_";
+    }
+
+    public CellPosition getTopLeftPosition() {
+        return position.getTopLeft();
+    }
+
+    public CellPosition getTopPosition() {
+        return position.getTop();
+    }
+
+    public CellPosition getTopRightPosition() {
+        return position.getTopRight();
+    }
+
+    public CellPosition getLeftPosition() {
+        return position.getLeft();
+    }
+
+    public CellPosition getRightPosition() {
+        return position.getRight();
+    }
+
+    public CellPosition getDownLeftPosition() {
+        return position.getDownLeft();
+    }
+
+    public CellPosition getDownPosition() {
+        return position.getDown();
+    }
+
+    public CellPosition getDownRightPosition() {
+        return position.getDownRight();
+    }
+
+    public List<CellPosition> getNeighbourPositions() {
+        return Arrays.asList(
+                getTopLeftPosition(),
+                getTopPosition(),
+                getTopRightPosition(),
+                getLeftPosition(),
+                getRightPosition(),
+                getDownLeftPosition(),
+                getDownPosition(),
+                getDownRightPosition());
     }
 }

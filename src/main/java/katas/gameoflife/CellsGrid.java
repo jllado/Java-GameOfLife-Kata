@@ -1,8 +1,8 @@
 package katas.gameoflife;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CellsGrid {
 
@@ -22,11 +22,7 @@ public class CellsGrid {
     }
 
     public int liveCellsCount() {
-        int liveCellsCount = 0;
-        for (Cell cell : getAllCells()) {
-            liveCellsCount += cell.isAlive() ? 1 : 0;
-        }
-        return liveCellsCount;
+        return (int) getAllCells().stream().filter(Cell::isAlive).count();
     }
 
     public CellsGrid createCopy() {
@@ -41,84 +37,39 @@ public class CellsGrid {
         return grid.length;
     }
 
-    public boolean isTopAlive(CellPosition position) {
-        CellPosition topPosition = position.topPosition();
-        return topPosition.isValid(width(), height()) && getCell(topPosition).isAlive();
-    }
-
     private Cell getCell(CellPosition position) {
+        if (!position.isValid(width(), height())) {
+            return new Cell(false, position);
+        }
         return grid[position.getX()][position.getY()];
-    }
-
-    public boolean isDownAlive(CellPosition position) {
-        CellPosition downPosition = new CellPosition(position.getX(), position.getY() + 1);
-        return downPosition.isValid(width(), height()) && getCell(downPosition).isAlive();
-    }
-
-    public boolean isLeftAlive(CellPosition position) {
-        CellPosition leftPosition = new CellPosition(position.getX() - 1, position.getY());
-        return leftPosition.isValid(width(), height()) && getCell(leftPosition).isAlive();
-    }
-
-    public boolean isRightAlive(CellPosition position) {
-        CellPosition rightPosition = new CellPosition(position.getX() + 1, position.getY());
-        return rightPosition.isValid(width(), height()) && getCell(rightPosition).isAlive();
-    }
-
-    public boolean isTopLeftAlive(CellPosition position) {
-        CellPosition topLeftPosition = new CellPosition(position.getX() - 1, position.getY() - 1);
-        return topLeftPosition.isValid(width(), height()) && getCell(topLeftPosition).isAlive();
-    }
-
-    public boolean isTopRightAlive(CellPosition position) {
-        CellPosition topRightPosition = new CellPosition(position.getX() + 1, position.getY() - 1);
-        return topRightPosition.isValid(width(), height()) && getCell(topRightPosition).isAlive();
-    }
-
-    public boolean isDownLeftAlive(CellPosition position) {
-        CellPosition downLeftPosition = new CellPosition(position.getX() - 1, position.getY() + 1);
-        return downLeftPosition.isValid(width(), height()) && getCell(downLeftPosition).isAlive();
-    }
-
-    public boolean isDownRightAlive(CellPosition position) {
-        CellPosition downRightPosition = new CellPosition(position.getX() + 1, position.getY() + 1);
-        return downRightPosition.isValid(width(), height()) && getCell(downRightPosition).isAlive();
     }
 
     public boolean hasFewerThanTwoLiveNeighbours(Cell cell) {
         return liveNeighbourCellsCount(cell) < 2;
     }
 
-    private List<Boolean> getNeighboursCells(Cell cell) {
-        return Arrays.asList(
-                this.isTopLeftAlive(cell.getPosition()),
-                this.isTopAlive(cell.getPosition()),
-                this.isTopRightAlive(cell.getPosition()),
-                this.isLeftAlive(cell.getPosition()),
-                this.isRightAlive(cell.getPosition()),
-                this.isDownLeftAlive(cell.getPosition()),
-                this.isDownAlive(cell.getPosition()),
-                this.isDownRightAlive(cell.getPosition()));
+    private List<Cell> getNeighboursCells(Cell cell) {
+        return cell.getNeighbourPositions().stream().map(position -> getCell(position)).collect(Collectors.toList());
     }
 
     public boolean hasMoreThanThreeLiveNeighbours(Cell cell) {
         return liveNeighbourCellsCount(cell) > 3;
     }
 
-    private long liveNeighbourCellsCount(Cell cell) {
-        return getNeighboursCells(cell).stream().filter(alive -> alive).count();
+    private int liveNeighbourCellsCount(Cell cell) {
+        return (int) getNeighboursCells(cell).stream().filter(neighbour -> neighbour.isAlive()).count();
     }
 
     public CellsGrid nextGeneration() {
         CellsGrid newCellsGrid = this.createCopy();
         for (Cell cell : getAllCells()) {
-            if (this.hasFewerThanTwoLiveNeighbours(cell)) {
+            if (hasFewerThanTwoLiveNeighbours(cell)) {
                 newCellsGrid.killCell(cell.getPosition());
             }
-            if (this.hasMoreThanThreeLiveNeighbours(cell)) {
+            if (hasMoreThanThreeLiveNeighbours(cell)) {
                 newCellsGrid.killCell(cell.getPosition());
             }
-            if (this.hasThreeLiveNeighbours(cell)) {
+            if (hasThreeLiveNeighbours(cell)) {
                 newCellsGrid.reviveCell(cell.getPosition());
             }
         }

@@ -21,10 +21,6 @@ public class CellPosition {
         return y;
     }
 
-    public CellPosition topPosition() {
-        return new CellPosition(x, y - 1);
-    }
-
     public boolean isValid(int width, int height) {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
@@ -58,5 +54,37 @@ public class CellPosition {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public CellPosition getTop() {
+        return new CellPosition(x, y - 1);
+    }
+
+    public CellPosition getTopLeft() {
+        return new CellPosition(x - 1, y - 1);
+    }
+
+    public CellPosition getTopRight() {
+        return new CellPosition(x + 1, y - 1);
+    }
+
+    public CellPosition getDownLeft() {
+        return new CellPosition(x - 1, y + 1);
+    }
+
+    public CellPosition getDownRight() {
+        return new CellPosition(x + 1, y + 1);
+    }
+
+    public CellPosition getRight() {
+        return new CellPosition(x + 1, y);
+    }
+
+    public CellPosition getDown() {
+        return new CellPosition(x, y + 1);
+    }
+
+    public CellPosition getLeft() {
+        return new CellPosition(x - 1, y);
     }
 }

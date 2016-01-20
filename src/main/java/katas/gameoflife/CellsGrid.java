@@ -50,10 +50,6 @@ public class CellsGrid {
         return cell.getNeighbourPositions().stream().map(position -> getCell(position)).collect(Collectors.toList());
     }
 
-    public boolean hasMoreThanThreeLiveNeighbours(Cell cell) {
-        return liveNeighbourCellsCount(cell) > 3;
-    }
-
     public int liveNeighbourCellsCount(Cell cell) {
         return (int) getNeighboursCells(cell).stream().filter(neighbour -> neighbour.isAlive()).count();
     }
@@ -65,9 +61,6 @@ public class CellsGrid {
                 if (rule.check(this, cell)) {
                     rule.apply(newCellsGrid, cell);
                 }
-            }
-            if (hasMoreThanThreeLiveNeighbours(cell)) {
-                newCellsGrid.killCell(cell.getPosition());
             }
             if (hasThreeLiveNeighbours(cell)) {
                 newCellsGrid.reviveCell(cell.getPosition());

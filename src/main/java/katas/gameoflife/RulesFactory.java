@@ -1,6 +1,6 @@
 package katas.gameoflife;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +8,10 @@ import java.util.List;
  */
 public class RulesFactory {
     public static List<Rule> createRules() {
-        return Arrays.asList(new HasFewerThanTwoLiveNeighbours());
+        List<Rule> rules = new ArrayList<>();
+        rules.add(new HasFewerThanTwoLiveNeighbours());
+        rules.add(new HasMoreThanThreeLiveNeighbours());
+        return rules;
     }
+
 }

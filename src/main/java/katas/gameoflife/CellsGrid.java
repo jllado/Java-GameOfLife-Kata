@@ -46,12 +46,8 @@ public class CellsGrid {
         return grid[position.getX()][position.getY()];
     }
 
-    private List<Cell> getNeighboursCells(Cell cell) {
-        return cell.getNeighbourPositions().stream().map(position -> getCell(position)).collect(Collectors.toList());
-    }
-
     public int liveNeighbourCellsCount(Cell cell) {
-        return (int) getNeighboursCells(cell).stream().filter(neighbour -> neighbour.isAlive()).count();
+        return (int) cell.getNeighbourPositions().stream().map(position -> getCell(position)).filter(neighbour -> neighbour.isAlive()).count();
     }
 
     public CellsGrid nextGeneration() {
@@ -61,9 +57,6 @@ public class CellsGrid {
                 if (rule.check(this, cell)) {
                     rule.apply(newCellsGrid, cell);
                 }
-            }
-            if (hasThreeLiveNeighbours(cell)) {
-                newCellsGrid.reviveCell(cell.getPosition());
             }
         }
         return newCellsGrid;
@@ -79,10 +72,6 @@ public class CellsGrid {
 
     private void setCell(Cell cell) {
         grid[cell.getPosition().getX()][cell.getPosition().getY()] = cell;
-    }
-
-    private boolean hasThreeLiveNeighbours(Cell cell) {
-        return liveNeighbourCellsCount(cell) == 3;
     }
 
     public List<Cell> getAllCells() {

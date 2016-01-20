@@ -11,6 +11,7 @@ public class RulesFactory {
         List<Rule> rules = new ArrayList<>();
         rules.add(new HasFewerThanTwoLiveNeighbours());
         rules.add(new HasMoreThanThreeLiveNeighbours());
+        rules.add(new HasThreeLiveNeighbours());
         return rules;
     }
 

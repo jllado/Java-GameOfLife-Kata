@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Arrays;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -20,7 +22,7 @@ public class CellsGridPrinterTest {
     @Test
     public void print() throws Exception {
         CellsGridPrinter printer = new CellsGridPrinter(consolePrinter);
-        CellsGrid grid = new CellsGrid(3, 3);
+        CellsGrid grid = new CellsGrid(3, 3, RulesFactory.createRules());
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(1, 1));
         grid.reviveCell(new CellPosition(2, 2));

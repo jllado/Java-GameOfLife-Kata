@@ -27,7 +27,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x1_grid_with_one_live_cell() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 1);
+        CellsGrid grid = createGrid(1, 1);
         grid.reviveCell(new CellPosition(0, 0));
         Game game = createGame(grid, printer);
 
@@ -38,7 +38,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x1_grid_with_zero_live_cells() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 1);
+        CellsGrid grid = createGrid(1, 1);
         Game game = createGame(grid, printer);
 
         assertThat(game.gridWidth(), is(1));
@@ -48,7 +48,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x2_grid_with_one_live_cell() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 2);
+        CellsGrid grid = createGrid(1, 2);
         grid.reviveCell(new CellPosition(0, 0));
         Game game = createGame(grid, printer);
 
@@ -59,7 +59,7 @@ public class GameTest {
 
     @Test
     public void should_create_1x2_grid_with_two_live_cells() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 2);
+        CellsGrid grid = createGrid(1, 2);
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(0, 1));
         Game game = createGame(grid, printer);
@@ -71,7 +71,7 @@ public class GameTest {
 
     @Test
     public void should_be_zero_cells_given_1x2_grid_with_one_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 2);
+        CellsGrid grid = createGrid(1, 2);
         grid.reviveCell(new CellPosition(0, 0));
         Game game = createGame(grid, printer);
 
@@ -82,7 +82,7 @@ public class GameTest {
 
     @Test
     public void should_be_zero_cells_given_1x2_grid_with_two_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 2);
+        CellsGrid grid = createGrid(1, 2);
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(0, 1));
         Game game = createGame(grid, printer);
@@ -94,7 +94,7 @@ public class GameTest {
 
     @Test
     public void should_be_one_cell_given_1x3_grid_with_three_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(1, 3);
+        CellsGrid grid = createGrid(1, 3);
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(0, 1));
         grid.reviveCell(new CellPosition(0, 2));
@@ -108,7 +108,7 @@ public class GameTest {
 
     @Test
     public void should_create_2x1_grid_with_one_live_cell() throws Exception {
-        CellsGrid grid = new CellsGrid(2, 1);
+        CellsGrid grid = createGrid(2, 1);
         grid.reviveCell(new CellPosition(0, 0));
         Game game = createGame(grid, printer);
 
@@ -119,7 +119,7 @@ public class GameTest {
 
     @Test
     public void should_create_3x1_grid_with_two_live_cell() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 1);
+        CellsGrid grid = createGrid(3, 1);
         grid.reviveCell(new CellPosition(1, 0));
         grid.reviveCell(new CellPosition(2, 0));
         Game game = createGame(grid, printer);
@@ -131,7 +131,7 @@ public class GameTest {
 
     @Test
     public void should_be_zero_cells_given_2x1_grid_with_one_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(2, 1);
+        CellsGrid grid = createGrid(2, 1);
         grid.reviveCell(new CellPosition(1, 0));
         Game game = createGame(grid, printer);
 
@@ -142,7 +142,7 @@ public class GameTest {
 
     @Test
     public void should_be_one_cell_given_3x1_grid_with_three_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 1);
+        CellsGrid grid = createGrid(3, 1);
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(1, 0));
         grid.reviveCell(new CellPosition(2, 0));
@@ -155,7 +155,7 @@ public class GameTest {
 
     @Test
     public void should_be_two_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_top_corners_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 3);
+        CellsGrid grid = createGrid(3, 3);
         grid.reviveCell(new CellPosition(1, 1));
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(2, 0));
@@ -168,7 +168,7 @@ public class GameTest {
 
     @Test
     public void should_be_two_cell_given_3x3_grid_with_one_live_cell_at_the_middle_and_two_live_cells_at_the_bottom_corners_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 3);
+        CellsGrid grid = createGrid(3, 3);
         grid.reviveCell(new CellPosition(1, 1));
         grid.reviveCell(new CellPosition(0, 2));
         grid.reviveCell(new CellPosition(2, 2));
@@ -181,7 +181,7 @@ public class GameTest {
 
     @Test
     public void should_be_four_cells_given_3x2_grid_with_six_live_cells_when_iterate() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 2);
+        CellsGrid grid = createGrid(3, 2);
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(1, 0));
         grid.reviveCell(new CellPosition(2, 0));
@@ -197,13 +197,17 @@ public class GameTest {
 
     @Test
     public void play() throws Exception {
-        CellsGrid grid = new CellsGrid(3, 2);
+        CellsGrid grid = createGrid(3, 2);
         grid.reviveCell(new CellPosition(0, 0));
         Game game = createGame(grid, printer);
 
         game.play();
 
         verify(printer, times(2)).print(any(), anyInt());
+    }
+
+    private CellsGrid createGrid(int widht, int height) {
+        return new CellsGrid(widht, height, RulesFactory.createRules());
     }
 
     public Game createGame(CellsGrid grid, CellsGridPrinter printer) {

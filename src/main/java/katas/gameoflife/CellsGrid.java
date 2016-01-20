@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 public class CellsGrid {
 
+    private final List<Rule> rules;
     private Cell[][] grid;
 
-    public CellsGrid(int width, int height) {
+    public CellsGrid(int width, int height, List<Rule> rules) {
+        this.rules = rules;
         this.grid = new Cell[width][height];
         for (int x = 0; x < this.grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -26,7 +28,7 @@ public class CellsGrid {
     }
 
     public CellsGrid createCopy() {
-        CellsGrid cellsGridCopy = new CellsGrid(this.width(), this.height());
+        CellsGrid cellsGridCopy = new CellsGrid(this.width(), this.height(), this.rules);
         for (int xPosition = 0; xPosition < this.width(); xPosition++) {
             System.arraycopy(this.grid[xPosition], 0, cellsGridCopy.grid[xPosition], 0, this.height());
         }
@@ -44,10 +46,6 @@ public class CellsGrid {
         return grid[position.getX()][position.getY()];
     }
 
-    public boolean hasFewerThanTwoLiveNeighbours(Cell cell) {
-        return liveNeighbourCellsCount(cell) < 2;
-    }
-
     private List<Cell> getNeighboursCells(Cell cell) {
         return cell.getNeighbourPositions().stream().map(position -> getCell(position)).collect(Collectors.toList());
     }
@@ -56,15 +54,17 @@ public class CellsGrid {
         return liveNeighbourCellsCount(cell) > 3;
     }
 
-    private int liveNeighbourCellsCount(Cell cell) {
+    public int liveNeighbourCellsCount(Cell cell) {
         return (int) getNeighboursCells(cell).stream().filter(neighbour -> neighbour.isAlive()).count();
     }
 
     public CellsGrid nextGeneration() {
         CellsGrid newCellsGrid = this.createCopy();
         for (Cell cell : getAllCells()) {
-            if (hasFewerThanTwoLiveNeighbours(cell)) {
-                newCellsGrid.killCell(cell.getPosition());
+            for (Rule rule : rules) {
+                if (rule.check(this, cell)) {
+                    rule.apply(newCellsGrid, cell);
+                }
             }
             if (hasMoreThanThreeLiveNeighbours(cell)) {
                 newCellsGrid.killCell(cell.getPosition());

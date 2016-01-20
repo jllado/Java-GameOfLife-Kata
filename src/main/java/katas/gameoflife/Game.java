@@ -1,5 +1,7 @@
 package katas.gameoflife;
 
+import java.util.Arrays;
+
 /**
  * Created by jllado on 1/11/16.
  */
@@ -40,7 +42,7 @@ public class Game {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        CellsGrid grid = new CellsGrid(5, 5);
+        CellsGrid grid = new CellsGrid(5, 5, Arrays.asList(new HasFewerThanTwoLiveNeighbours()));
         grid.reviveCell(new CellPosition(0, 0));
         grid.reviveCell(new CellPosition(1, 0));
         grid.reviveCell(new CellPosition(0, 1));

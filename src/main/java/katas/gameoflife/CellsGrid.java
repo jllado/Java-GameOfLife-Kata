@@ -2,7 +2,6 @@ package katas.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CellsGrid {
 
@@ -27,7 +26,7 @@ public class CellsGrid {
         return (int) getAllCells().stream().filter(Cell::isAlive).count();
     }
 
-    public CellsGrid createCopy() {
+    private CellsGrid createCopy() {
         CellsGrid cellsGridCopy = new CellsGrid(this.width(), this.height(), this.rules);
         for (int xPosition = 0; xPosition < this.width(); xPosition++) {
             System.arraycopy(this.grid[xPosition], 0, cellsGridCopy.grid[xPosition], 0, this.height());
@@ -35,7 +34,7 @@ public class CellsGrid {
         return cellsGridCopy;
     }
 
-    int width() {
+    public int width() {
         return grid.length;
     }
 
@@ -47,7 +46,7 @@ public class CellsGrid {
     }
 
     public int liveNeighbourCellsCount(Cell cell) {
-        return (int) cell.getNeighbourPositions().stream().map(position -> getCell(position)).filter(neighbour -> neighbour.isAlive()).count();
+        return (int) cell.getNeighbourPositions().stream().map(position -> getCell(position)).filter(Cell::isAlive).count();
     }
 
     public CellsGrid nextGeneration() {
@@ -74,7 +73,7 @@ public class CellsGrid {
         grid[cell.getPosition().getX()][cell.getPosition().getY()] = cell;
     }
 
-    public List<Cell> getAllCells() {
+    private List<Cell> getAllCells() {
         List<Cell> cells = new ArrayList<>();
         for (int y = 0; y < height(); y++) {
             for (int x = 0; x < width(); x++) {
@@ -84,7 +83,7 @@ public class CellsGrid {
         return cells;
     }
 
-    public Cell getFirstCell() {
+    private Cell getFirstCell() {
         return getCell(new CellPosition(0, 0));
     }
 
